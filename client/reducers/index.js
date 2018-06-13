@@ -9,9 +9,9 @@ function users(state = [], action) {
   }
 }
 
-function post(state = [], action) {
+function write(state = [], action) {
   switch (action.type) {
-    case 'FETCHED_POST':
+    case 'FETCHED_WRITE':
       return action.payload;
     default:
       return state;
@@ -20,7 +20,7 @@ function post(state = [], action) {
 
 const rootReducer = combineReducers({
   users,
-  post
+  write
 });
 
 export default rootReducer;

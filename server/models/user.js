@@ -18,7 +18,14 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true
       }
     }
-  }, {});
+  }, {
+    classMethods:{
+      associate:function(models){
+        User.hasMany(models.Write);
+      }
+    }
+
+  });
  
   User.beforeValidate((user) => {
     return bcrypt.hash(user.password, 10).then( hash => {

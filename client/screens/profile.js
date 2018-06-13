@@ -9,7 +9,7 @@ import {
 import { Button } from 'native-base';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
-import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 
 class ProfileScreen extends React.Component {
@@ -80,14 +80,6 @@ class ProfileScreen extends React.Component {
       </View>
     );
   }
-
-  // render() {
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text>Profile Screen</Text>
-  //     </View>
-  //   );
-  // }
 
   _showMoreApp = () => {
     this.props.navigation.navigate('Other');
