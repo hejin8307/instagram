@@ -4,7 +4,8 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  Button
+  Button,
+  AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Left, Right } from 'native-base';
@@ -27,12 +28,14 @@ class WriteScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput onChangeText={(content) => this.setState({ content })}
-        placeholder="Write a caption..." 
-        style={styles.input}
-        value={this.state.content} spellCheck={false}
-        autoCorrect={false}
-        autoCapitalize='none'/>
+        
+        <TextInput placeholder="Write a caption..." style={styles.input}
+          onChangeText={(content) => this.setState({ content })}
+          spellCheck={false}
+          autoCorrect={false}
+          autoCapitalize='none'
+          value={this.state.content}
+          />
         <View style={{padding: 20, borderBottomWidth: 1, borderTopColor: '#eae5e5', flexDirection: 'row'}}>
           <Left>
             <Text style={{paddingBottom: 10, fontSize: 15}}>Tag People</Text>
@@ -51,7 +54,10 @@ class WriteScreen extends React.Component {
         </View>       
       
         <View style={{padding: 10}}>
-          <Button title="Share" onPress={() => {this.props.write(this.state.content);}} disabled={!this.state.content}/>
+          <Button title="Share" onPress={() => {
+            this.props.write(this.state.content);
+          }} disabled={!this.state.content }
+            style={styles.button}/>
         </View>
       </View>
     )
@@ -71,7 +77,10 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginTop: 5,
     fontSize: 20,
-  }
+  },
+  button: {
+    alignSelf: "stretch",
+  },
 });
 
 export default connect(null, { write })(WriteScreen);

@@ -59,38 +59,35 @@ export function fetchUsers() {
 
 export function fetchWrite() {
   return dispatch => {
-    axios.get(`${Config.server}/write`).then( respons => {
+    console.log(axios.defaults.headers.common);
+    axios.get(`${Config.server}/api/write`).then( respons => {
       dispatch({type: 'FETCHED_WRITE', payload: respons.date})
     }).catch(err => {
       console.log(err.response);
-      if (err.response.status == 401) {
-        dispatch(signout());
-      } else {
-        alert('Network Error');
-      }
+      
     })
   }
 }
 
 export function write(content) {
   return async dispatch => {
+    const response = await axios.post(`${Config.server}/api/write`,
+        qs.stringify({
+          content: content
+        }), {
+        });
     // try {
     //   // 주의!: OAuth2Server는 x-www-form-urlencoded 만 받는다.
-    //   const response = await axios.post(`${Config.server}/write`,
+    //   const response = await axios.post(`${Config.server}/api/write`,
     //     qs.stringify({
     //       content: content
     //     }), {
-    //       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     //     });
+
     //   NavigationService.navigate('App');
     // } catch (err) {
     //   console.log(err.response || err);
     //   alert('Invalid ID or Password');
     // }
-    const response = await axios.post(`${Config.server}/write`,
-      qs.stringify({
-        content: content
-      }))
-      NavigationService('App');
   };
 }
